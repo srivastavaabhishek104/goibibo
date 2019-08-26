@@ -1,0 +1,89 @@
+.pac-man {
+    position:relative;
+    margin-top: -15px;
+    z-index: 2;
+    width: 35%;
+    border-right: 180px solid transparent;
+    border-top: 200px solid rgba(66, 183, 229, 0.9);
+    border-left: 180px solid rgba(66, 183, 229, 0.9);
+    border-bottom:200px solid rgba(66, 183, 229, 0.9);
+}
+
+.your-booking-box {
+    margin: 0;
+    box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.75);
+    text-align: center;
+    border: none;
+    width: 70%;
+    border-spacing: 0;
+    position: absolute;
+    margin-top: -150px;
+    margin-left: -25%;
+}
+
+.row {
+    background-color: white;
+    grid-row-gap: 0px;
+    row-gap: 0px;
+    padding: 10px 25px;
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .row-header {
+    padding: 23px 30px;
+    border-bottom: 1px solid lightgray;
+    font-weight:bold;
+    font-size: 22px;
+    background-color:orange;
+    height: 10px;
+    color: white;
+  }
+  .booking-span {
+    font-weight: normal;
+    font-size: 14px;
+    color: grey;
+  }
+.img {
+    width: 170%;
+    height: 370px;
+    margin-bottom: -5px;
+    position: absolute;
+    margin-top: -150px;
+    margin-left: 63%;
+}
+.room-details {
+    box-shadow: 1px 3px 8px -2px rgba(0,0,0,0.75);
+    position: absolute;
+    margin-left: 63%;
+    margin-top: 220px;
+    width: 170%;
+}
+
+.row-details {
+    margin-left:10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.room-span {
+    font-weight: 600;
+    font-size: 16px;
+    color: grey;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .booking-button {
+    background: orange;
+    display: block;
+    border: 1px solid orange;
+    color:white;
+    padding: 10px 30px;
+    margin: 25px auto;
+    border-radius: 5px ;
+    font-weight: bold;
+    font-size: 18px;
+    position:absolute;
+    margin-top:300px;
+  }

@@ -1,0 +1,78 @@
+.LoginModal {
+    position: absolute;
+    z-index: 500;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    left: 15%;
+    top: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+
+@media (min-width: 600px) {
+    .LoginModal {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}
+
+.Header {
+    background-color:rgba(66, 183, 229, 0.9);
+    width: 100%;
+    height: 30%;
+}
+
+.img-style {
+    margin-left: 190px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    width: 10%;
+    height: 25%;
+}
+
+.center-style {
+    margin-left: 250px;
+    margin-top: -55px;
+    position: absolute;
+    margin-bottom: -50px;
+    font-size: x-large;
+    font-weight: 500;
+    color: white;
+}
+
+.input-style {
+    width: 60%;
+    margin-left: 100px;
+    height: 50%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 2px solid;
+}
+
+.label-style{
+    width: 100%;
+    font-weight: 500;
+    margin-left: 100px;
+}
+
+
+.buttonForm {
+    background: orange;
+    display: block;
+    border: 1px solid orange;
+    color:white;
+    padding: 12px 50px;
+    margin: 25px auto;
+    border-radius: 30px ;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.paragraph-style {
+    text-align: center;
+    font-weight: 600;
+}

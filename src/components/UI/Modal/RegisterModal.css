@@ -1,0 +1,106 @@
+.RegisterModal {
+    position: absolute;
+    z-index: 500;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    top: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    height: 500px;
+}
+
+@media (min-width: 600px) {
+    .RegisterModal {
+        width: 800px;
+        left: calc(50% - 400px);
+    }
+}
+
+.right-modal {
+    background: url("../../../assets/images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+}
+
+.label-style-half{
+    width: 50%;
+    font-weight: 500;
+}
+
+.input-style-half {
+    width: 30%;
+    height: 50%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 2px solid;
+}
+
+.register-input-style {
+    width: 68%;
+    margin-left: 40px;
+    height: 50%;
+    padding: 10px;
+    border-radius: 2px solid;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.register-label-style{
+    width: 100%;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.blackiconcolor {
+    color:white;
+}
+
+.registerButtonForm {
+    background: orange;
+    display: block;
+    border: 1px solid orange;
+    color:white;
+    padding: 12px 50px;
+    margin-top: -20px;
+    margin-left: 28%;
+    border-radius: 30px ;
+    font-weight: bold;
+    font-size: 18px;
+}
+.social-button{
+    width:300px;
+    height:50px;
+    text-align:"center";
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+    border:0px solid;
+    margin:10px;
+}
+
+.register-paragraph-style {
+    text-align: center;
+    font-weight: 600;
+    margin-top:-22px;
+}
+
+  .circle { width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    margin-top: 236px;
+    position: absolute;
+    margin-left: 377px;
+    -webkit-box-shadow: -1px 0px 8px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 8px -2px rgba(0,0,0,0.75);
+    box-shadow: -1px 0px 8px -2px rgba(0,0,0,0.75);
+  }
