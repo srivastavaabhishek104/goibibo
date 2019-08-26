@@ -42,6 +42,13 @@
       font-size: 18px;
   }
 
+  .buttonForm:focus {
+    outline: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
   .textContent {
       position: absolute;
       margin-left: 800px;

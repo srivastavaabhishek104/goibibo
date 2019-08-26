@@ -71,7 +71,12 @@
     font-weight: bold;
     font-size: 18px;
 }
-
+.buttonForm:focus {
+    outline: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
 .paragraph-style {
     text-align: center;
     font-weight: 600;
