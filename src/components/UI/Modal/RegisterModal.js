@@ -13,6 +13,34 @@ class RegisterModal extends Component {
     } 
     onRegisterFormSubmit = (evt) => {
         evt.preventDefault();
+        let flag = true;
+        //alert(JSON.parse(localStorage.getItem(evt.target.email.value)));
+        if(evt.target.confirm_pass.value !== evt.target.pass.value) {
+            alert("Password and Confirm Password Fields must be same!!!")
+        } else {
+            for (var ls in localStorage) {
+                if(evt.target.email.value === ls) {
+                    flag = false;
+                    break;
+                } 
+            }
+            if(flag) {
+                let users = {
+                    user_id : evt.target.email.value,
+                    email: evt.target.email.value,
+                    first: evt.target.first.value,
+                    last: evt.target.last.value,
+                    password: evt.target.pass.value
+                };
+                localStorage.setItem(evt.target.email.value,JSON.stringify(users));
+                alert("Registered Successfully");
+                
+                this.props.registerModalClosedHandler();
+                this.props.loginModalOpenHandler(1);
+            } else {
+                alert("User Already Exist!!!");
+            }
+        }
     }
     render() {
        return (
@@ -34,20 +62,20 @@ class RegisterModal extends Component {
                             <label className="label-style-half" style={{float:"left",marginLeft:"40px"}}>First Name</label>
                             <label className="label-style-half" style={{float:"right",marginTop:"-21px",marginRight:"5px"}}>Last Name</label>
                             <br/>
-                            <input required type="text" className="input-style-half" style={{float:"left",marginLeft:"40px"}}/>
-                            <input required type="text" className="input-style-half" style={{float:"right",marginTop:"10px",marginRight:"62px"}}/>
+                            <input required type="text" name="first" className="input-style-half" style={{float:"left",marginLeft:"40px"}}/>
+                            <input required type="text" name="last" className="input-style-half" style={{float:"right",marginTop:"10px",marginRight:"62px"}}/>
                            
                             <label style={{marginTop:"-10px"}} className="register-label-style">Email Address</label>
                             <br/>
-                            <input required type="email" className="register-input-style"/>
+                            <input required type="email" name="email" className="register-input-style"/>
                             <br/>
                             <label className="register-label-style">Password</label>
                             <br/>
-                            <input required type="password" className="register-input-style"/>
+                            <input required type="password" name = "pass" className="register-input-style"/>
                             <br/>
                             <label className="register-label-style">Confirm Password</label>
                             <br/>
-                            <input required type="password" className="register-input-style"/>
+                            <input required type="password" name="confirm_pass" className="register-input-style"/>
                             <br/><br/>
                             <input type="submit" className="registerButtonForm" value="Register"/>
                         </form>

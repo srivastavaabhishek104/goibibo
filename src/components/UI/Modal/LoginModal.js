@@ -6,27 +6,19 @@ import User from '../../../assets/images/user.png'
 import {Link,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 class LoginModal extends Component {
-    state = {
-        email: '',
-        password: ''
-    }
-    onChangeHandler = (e) => {
-        if(e.target.name === "email") {
-            this.setState({
-                email: e.target.value
-            });
-        } else {
-            this.setState({
-                password: e.target.value
-            });
-        }
-    }
-
     formHandler = (e) => {
+        let flag = false;
         e.preventDefault();
-        if(this.state.email === "admin@gmail.com" && this.state.password === "admin") {
+        for (var ls in localStorage) {
+            if(e.target.email.value === ls && e.target.password.value === JSON.parse(localStorage.getItem(e.target.email.value)).password) {
+                flag = true;
+            } 
+        }
+        if(flag) {
+    
             this.props.loginModalHandler();
-            this.props.loginHandler();
+            this.props.loginHandler(e.target.email.value);
+
             this.props.history.push({
                 pathname: '/dashboard'
             });
@@ -54,10 +46,10 @@ class LoginModal extends Component {
                     <form style={{marginTop:"50px",marginBottom:"25px"}} onSubmit={(e) => this.formHandler(e)}>
                         <label className="label-style">Email Address</label>
                         <br/>
-                        <input required type="email" className="input-style" value={this.state.email} name="email" onChange={(e) => this.onChangeHandler(e)}/>
+                        <input required type="email" className="input-style" name="email"/>
                         <label className="label-style">Password</label>
                         <br/>
-                        <input required type="password" className="input-style" value={this.state.password} name="password" onChange={(e) => this.onChangeHandler(e)}/>
+                        <input required type="password" className="input-style" name="password"/>
                         <p style={{textAlign:"end",marginRight:"40px",marginTop:"-5px",fontWeight:"400"}}>Forgot Password?</p>
                         <input type="submit" className="buttonForm" value="Login"/>
                     </form>
@@ -79,8 +71,8 @@ const mapDispatchToProps = (dispatch) => {
         loginModalHandler: () => {
             return dispatch({type: "loginOrRegisterState" })
         },
-        loginHandler: () => {
-            return dispatch({type: "loginHandler" })
+        loginHandler: (userId) => {
+            return dispatch({type: "loginHandler", userId: userId})
         },
         loginModalClosedHandler: () => {
             return dispatch({type: "loginOrRegisterState" })

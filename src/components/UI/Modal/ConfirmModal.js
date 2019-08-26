@@ -7,11 +7,8 @@ import {connect} from 'react-redux';
 class ConfirmModal extends Component {
     
     submitHandler = () => {
-        localStorage.setItem('room', "");
-        localStorage.setItem('guest', "");
-        localStorage.setItem('startDate', "");
-        localStorage.setItem('endDate', "");
-        localStorage.setItem('location', "");
+        //localStorage.setItem('bookingInfo.'+this.props.userId, null);
+        localStorage.removeItem('bookingInfo.'+this.props.userId);
         this.props.cancelModalClosedHandler();
     }
     render() {
@@ -48,7 +45,8 @@ class ConfirmModal extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        formType: state.formType
+        formType: state.formType,
+        userId: state.user_id
     } 
 }
 

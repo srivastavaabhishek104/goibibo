@@ -8,6 +8,22 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import ConfirmModal from '../UI/Modal/ConfirmModal';
 class YourBooking extends Component {
+
+    cancelHandler = () => {
+        if(localStorage.getItem("bookingInfo."+this.props.userId) !== null) {
+            this.props.cancelModalHandler(4)
+        } else {
+            alert("No Record Exist");
+        }
+    }
+
+    updateHandler = () => {
+        if(localStorage.getItem("bookingInfo."+this.props.userId) !== null) {
+            this.props.updateModalHandler(3);
+        } else {
+            alert("No Record Exist");
+        }
+    }
     render() {
         let location = "";
         let sDate = "";
@@ -15,31 +31,33 @@ class YourBooking extends Component {
         let room = "";
         let person = "";
         let date_input = "",day ="",month="",year=""
+        //alert(typeof(localStorage.getItem("bookingInfo."+this.props.userId)));
+        if(localStorage.getItem("bookingInfo."+this.props.userId) !== null) {
+            var ls = JSON.parse(localStorage.getItem("bookingInfo."+this.props.userId));
         
-        //alert(localStorage.getItem("location"));
-
-        if(localStorage.getItem("location") !== "" && localStorage.getItem("location")!==null) {
-            location = localStorage.getItem("location");
-        }
-        if(localStorage.getItem("startDate") !== "" && localStorage.getItem("startDate")!==null) {
-            date_input = new Date(localStorage.getItem("startDate"));
-            day = date_input.getDate();
-            month = date_input.getMonth() + 1;
-            year = date_input.getFullYear();
-            sDate = day + "/" + month + "/" + year; // That’s your formatted date
-        }
-        if(localStorage.getItem("endDate") !== "" && localStorage.getItem("endDate")!==null) {
-            date_input = new Date(localStorage.getItem("endDate"));
-            day = date_input.getDate();
-            month = date_input.getMonth() + 1;
-            year = date_input.getFullYear();
-            eDate = day + "/" + month + "/" + year; // That’s your formatted date
-        }
-        if(localStorage.getItem("room") !== "" && localStorage.getItem("room")!==null) {
-            room = localStorage.getItem("room");
-        }
-        if(localStorage.getItem("guest") !== "" && localStorage.getItem("guest")!==null) {
-            person = localStorage.getItem("guest");
+            if(ls.location !== "" && ls.location!==null) {
+                location = ls.location;
+            }
+            if(ls.startDate !== "" && ls.startDate!==null) {
+                date_input = new Date(ls.startDate);
+                day = date_input.getDate();
+                month = date_input.getMonth() + 1;
+                year = date_input.getFullYear();
+                sDate = day + "/" + month + "/" + year; // That’s your formatted date
+            }
+            if(ls.endDate !== "" && ls.endDate !==null) {
+                date_input = new Date(ls.endDate);
+                day = date_input.getDate();
+                month = date_input.getMonth() + 1;
+                year = date_input.getFullYear();
+                eDate = day + "/" + month + "/" + year; // That’s your formatted date
+            }
+            if(ls.room !== "" && ls.room!==null) {
+                room = ls.room ;
+            }
+            if(ls.guest !== "" && ls.guest !==null) {
+                person = ls.guest;
+            }
         }
 
         let modal = null;
@@ -75,8 +93,8 @@ class YourBooking extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <button className="booking-button" style={{marginLeft:"65%"}} onClick={()=> this.props.cancelModalHandler(4)}>Cancel</button>
-                    <button className="booking-button" style={{marginLeft:"205%"}} onClick={()=>this.props.updateModalHandler(3)}>Update</button>
+                    <button className="booking-button" style={{marginLeft:"65%"}} onClick={this.cancelHandler}>Cancel</button>
+                    <button className="booking-button" style={{marginLeft:"205%"}} onClick={this.updateHandler}>Update</button>
                 </div>
                
             </Aux>
@@ -88,7 +106,8 @@ const mapStateToProps = (state) => {
     return {
         loginOrRegisterState: state.loginOrRegisterState,
         formType: state.formType,
-        loginStatus: state.loginStatus
+        loginStatus: state.loginStatus,
+        userId: state.user_id
     } 
 }
 

@@ -1,7 +1,8 @@
 const initialState = {
     loginStatus : false,
     loginOrRegisterState: false,
-    formType: 0
+    formType: 0,
+    user_id: ""
 };
 
 const reducer = (state= initialState,action) => {
@@ -26,7 +27,8 @@ const reducer = (state= initialState,action) => {
         case "loginHandler": 
             return {
                 ...state,
-                loginStatus:true
+                loginStatus:true,
+                user_id: action.userId
             }
         default:return state;
     }

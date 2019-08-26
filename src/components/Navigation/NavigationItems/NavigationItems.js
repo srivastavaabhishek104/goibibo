@@ -27,9 +27,9 @@ class NavigationItems extends Component {
                         <li><NavLink to="/dashboard"> Home </NavLink></li>
                         <li><NavLink to="/bookings" style={{marginLeft:"10px",marginRight:"20px"}}> Your Bookings </NavLink></li>
                         <li><img src={ProfilePic} alt = "Profile Pic" style={{borderRadius:"50%",width:"50px",height:"40px",marginTop:"3px",marginRight:"-10px"}}></img></li>
-                        <li>
-                            <NavLink to="#"> Admin  
-                                <ul className="dropdown">
+                        <li> 
+                            <NavLink to="#"> {this.props.userId}
+                                <ul className="dropdown"> 
                                     <li><Link to="#" onClick={this.handleLogout}>Log out</Link></li>
                                 </ul>
                             </NavLink>
@@ -54,7 +54,8 @@ const mapStateToProps = (state) => {
     return {
         loginOrRegisterState: state.loginOrRegisterState,
         formType: state.formType,
-        loginStatus: state.loginStatus
+        loginStatus: state.loginStatus,
+        userId: state.user_id
     } 
 }
 

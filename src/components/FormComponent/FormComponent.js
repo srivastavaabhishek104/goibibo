@@ -4,7 +4,8 @@ import User from '../../assets/images/user.png'
 import Aux from '../hoc/Aux';
 import DatePicker from "react-datepicker";
 import {withRouter} from 'react-router-dom'
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import {connect} from 'react-redux';
 class FormComponent extends Component {
     constructor(props) {
         super(props);
@@ -33,11 +34,16 @@ class FormComponent extends Component {
       formHandler = (e) => {
         e.preventDefault();
         if(this.state.startDate.getTime()<this.state.endDate.getTime()) {
-            localStorage.setItem('location', e.target.location.value);
-            localStorage.setItem('room', e.target.room.value);
-            localStorage.setItem('guest', e.target.guest.value);
-            localStorage.setItem('startDate', this.state.startDate);
-            localStorage.setItem('endDate', this.state.endDate);
+            let users = {
+                user_id: this.props.userId,
+                location: e.target.location.value,
+                room: e.target.room.value,
+                guest: e.target.guest.value,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate
+            }
+            
+            localStorage.setItem("bookingInfo."+this.props.userId,JSON.stringify(users));
             
             this.props.history.push({
                 pathname: '/bookings'
@@ -204,5 +210,28 @@ class FormComponent extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        userId: state.user_id
+    } 
+}
 
-export default withRouter(FormComponent);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         loginModalHandler: () => {
+//             return dispatch({type: "loginOrRegisterState" })
+//         },
+//         loginHandler: (userId) => {
+//             return dispatch({type: "loginHandler", userId: userId})
+//         },
+//         loginModalClosedHandler: () => {
+//             return dispatch({type: "loginOrRegisterState" })
+//         },
+//         registerModalOpenHandler: (fType) => {
+//             return dispatch({type: "login or register", fType:fType })
+//         }
+//     };
+// }
+
+
+export default connect(mapStateToProps)(withRouter(FormComponent));

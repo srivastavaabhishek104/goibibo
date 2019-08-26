@@ -35,17 +35,28 @@ class Update extends Component {
     
     formHandler = (e) => {
         e.preventDefault();
-        localStorage.setItem('room', localStorage.getItem("room"));
-        localStorage.setItem('room', e.target.newRoom.value);
-        localStorage.setItem('startDate', localStorage.getItem("startDate"));
-        localStorage.setItem('startDate', this.state.newStartDate);
+        var ls = JSON.parse(localStorage.getItem("bookingInfo."+this.props.userId));
         
-        this.props.updateModalHandler();
-        
-        this.props.history.push({
-            pathname: '/bookings'
-        });
-        
+        if(new Date(ls.endDate).getTime() >= this.state.newStartDate.getTime()) {
+            let users = {
+                user_id: this.props.userId,
+                location: ls.location,
+                room: e.target.newRoom.value,
+                guest: ls.guest,
+                startDate: this.state.newStartDate,
+                endDate: ls.endDate
+            }
+            
+            localStorage.setItem("bookingInfo."+this.props.userId,JSON.stringify(users));
+            
+            this.props.updateModalHandler();
+            
+            this.props.history.push({
+                pathname: '/bookings'
+            });
+        } else {
+            alert("Check-in Date must be less than Check-out Date");
+        }
     }
   
     render() {
@@ -53,17 +64,20 @@ class Update extends Component {
         let bookingDate = ""
         let date_input = "",day ="",month="",year=""
         
-        if(localStorage.getItem("startDate") !== "" && localStorage.getItem("startDate")!==null) {
-            date_input = new Date(localStorage.getItem("startDate"));
-            day = date_input.getDate();
-            month = date_input.getMonth() + 1;
-            year = date_input.getFullYear();
-            bookingDate = day + "/" + month + "/" + year; // That’s your formatted date
-        } 
-
-        if(localStorage.getItem("room") !== "" && localStorage.getItem("room")!==null) {
-            room = localStorage.getItem("room");
+        var ls = JSON.parse(localStorage.getItem("bookingInfo."+this.props.userId));
+        if(ls !== null) {
+           if(ls.startDate !== "" && ls.startDate!==null) {
+                date_input = new Date(ls.startDate);
+                day = date_input.getDate();
+                month = date_input.getMonth() + 1;
+                year = date_input.getFullYear();
+                bookingDate = day + "/" + month + "/" + year; // That’s your formatted date
+            }
+            if(ls.room !== "" && ls.room!==null) {
+                room = ls.room ;
+            }
         }
+
         return (
             room === "" && bookingDate === "" ? <div></div>:<Aux>    
                 <Backdrop show ={this.props.show } clicked={this.props.modalClosed} />  
@@ -137,6 +151,13 @@ class Update extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        formType: state.formType,
+        userId: state.user_id
+    } 
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         updateModalHandler: () => {
@@ -145,4 +166,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(null,mapDispatchToProps)(withRouter(Update));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Update));
